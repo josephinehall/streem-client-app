@@ -4,7 +4,25 @@ function Form() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(formData.get('query'), formData.get('after'), formData.get('before'), formData.get('interval'));
+
+    var url = new URL(process.env.REACT_APP_API_URL)
+
+    var params = {
+      query: formData.get('query'),
+      after:formData.get('after'),
+      before: formData.get('before'),
+      interval: formData.get('interval'),
+    }
+
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url, {
+      headers: {
+        'Authorization': 'Token ' + process.env.REACT_APP_API_TOKEN
+      }
+    }).then(response => response.json())
+      .then(data => console.log(data));
+
   };
   return (
     <form onSubmit={handleSubmit}>
