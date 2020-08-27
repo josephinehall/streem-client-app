@@ -12,25 +12,6 @@ class Form extends Component {
     this.props.fetchData(formData);
   }
 
-    var url = new URL(process.env.REACT_APP_API_URL)
-
-    var params = {
-      query: formData.get('query'),
-      after:formData.get('after'),
-      before: formData.get('before'),
-      interval: formData.get('interval'),
-    }
-
-    url.search = new URLSearchParams(params).toString();
-
-    fetch(url, {
-      headers: {
-        'Authorization': 'Token ' + process.env.REACT_APP_API_TOKEN
-      }
-    }).then(response => response.json())
-      .then(data => console.log(data));
-
-  };
   return (
       <div>
         <label htmlFor="query">Query:</label>
