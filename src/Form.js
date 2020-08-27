@@ -9,6 +9,8 @@ class Form extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
+    this.props.fetchData(formData);
+  }
 
     var url = new URL(process.env.REACT_APP_API_URL)
 
