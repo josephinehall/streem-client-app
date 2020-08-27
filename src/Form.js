@@ -23,7 +23,6 @@ class Form extends Component {
             name="query"
             required
             placeholder="scott morrison"
-            value="scott morrison"
           />
         </div>
         <div>
@@ -34,7 +33,6 @@ class Form extends Component {
             name="after"
             required
             placeholder="1554037199999"
-            value="1554037199999"
           />
         </div>
         <div>
@@ -45,7 +43,6 @@ class Form extends Component {
             name="before"
             required
             placeholder="1567209600000"
-            value="1567209600000"
           />
         </div>
         <div>
@@ -56,8 +53,6 @@ class Form extends Component {
             name="interval"
             required
             placeholder="1d"
-            value="10d"
-            onKeyUp={this.handleKey}
           />
         </div>
         <button>Search</button>
