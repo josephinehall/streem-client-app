@@ -9,6 +9,9 @@ class App extends Component {
     super(props);
     this.state = { data: null };
     this.fetchData = this.fetchData.bind(this);
+    this.formatData = this.formatData.bind(this);
+  }
+
   fetchData(formData) {
     var url = new URL(process.env.REACT_APP_API_URL);
 
@@ -27,6 +30,33 @@ class App extends Component {
       }
     }).then(response => response.json())
       .then(data => this.setState({ data }));
+  }
+
+  formatData(data) {
+    let mediaTypes = [];
+
+    let results = data.map((dateBucket) => {
+      const result = {
+        timestamp: dateBucket.key_as_string
+      };
+      dateBucket.term_agg.buckets.forEach((media) => {
+        result[media.key.toLowerCase()] = media.doc_count;
+        mediaTypes.push(media.key);
+      });
+      return result;
+    });
+
+    let uniqueMediaTypes = [...new Set(mediaTypes)];
+
+    return {
+      results: results,
+      media: uniqueMediaTypes.map((type) => {
+        return {
+          name: type,
+          id: type.toLowerCase()
+        };
+      })
+    };
   }
 
   render() {
