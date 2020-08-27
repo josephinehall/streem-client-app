@@ -7,12 +7,16 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: null };
+    this.state = {
+      data: null,
+      error: false
+    };
     this.fetchData = this.fetchData.bind(this);
     this.formatData = this.formatData.bind(this);
   }
 
   fetchData(formData) {
+    this.setState({ error: false });
     var url = new URL(process.env.REACT_APP_API_URL);
 
     var params = {
@@ -28,8 +32,13 @@ class App extends Component {
       headers: {
         'Authorization': 'Token ' + process.env.REACT_APP_API_TOKEN
       }
-    }).then(response => response.json())
-      .then(data => this.setState({ data }));
+    }).then(response => {
+      if (!response.ok) {
+        this.setState({ error: true });
+        throw response;
+      }
+      return response.json();
+    }).then(data => this.setState({ data }));
   }
 
   formatData(data) {
@@ -65,7 +74,8 @@ class App extends Component {
     return (
       <div className="App">
         <Form fetchData={this.fetchData} />
-        { (data != null) && <Graph data={this.formatData(data)} /> }
+        { (data != null && !this.state.error) && <Graph data={this.formatData(data)} /> }
+        { (this.state.error) && <div>Sorry, we couldnt find any results.</div>}
       </div>
     )
   }
