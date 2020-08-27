@@ -75,7 +75,7 @@ class App extends Component {
       <div className="App">
         <Form fetchData={this.fetchData} />
         { (data != null && !this.state.error) && <Graph data={this.formatData(data)} /> }
-        { (this.state.error) && <div>Sorry, we couldnt find any results.</div>}
+        { (this.state.error) && <div>Sorry, we couldn’t find any results.</div>}
       </div>
     )
   }
