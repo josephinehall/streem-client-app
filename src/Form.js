@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
-  const handleSubmit = (e: React.FormEvent) => {
 class Form extends Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
 
@@ -28,7 +30,6 @@ class Form extends Component {
 
   };
   return (
-    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="query">Query:</label>
         <input
@@ -72,6 +73,7 @@ class Form extends Component {
       <button>Search</button>
     </form>
   );
+      <form onSubmit={this.handleSubmit}>
 }
 
 export default Form;
