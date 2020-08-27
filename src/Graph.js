@@ -63,7 +63,7 @@ export default class Graph extends React.PureComponent {
           })}
           <Animation />
           <Legend position="bottom" rootComponent={Root} labelComponent={Label} />
-          <Title text="Results" />
+          <Title text="News aggregated by date and medium" />
           <Stack
             stacks={[
               { series: data.media.map(a => a.name) },
