@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-function Form() {
   const handleSubmit = (e: React.FormEvent) => {
+class Form extends Component {
+  constructor(props) {
+    super(props);
+  }
     e.preventDefault();
     const formData = new FormData(e.target);
 
